@@ -43,7 +43,7 @@ class Load
 
 		load_plugin_textdomain('twz-wp-notice-plugin-required', false, dirname(dirname(plugin_basename(__FILE__))) . '/languages/');
 
-		if (!array_key_exists('server_url', $this->plugins)) {
+		if (array_key_exists('server_url', $this->plugins)) {
 
 			wp_enqueue_script('plugin-installer', plugin_dir_url(__FILE__) . 'assets/twz/js/installer.js', ['jquery'], '1.0.0', false);
 			wp_localize_script(
