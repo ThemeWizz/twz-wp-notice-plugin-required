@@ -1,5 +1,5 @@
 {
-    "name": "themewizz/twz-plugin-manager-client-library",
+    "name": "themewizz/twz_wp_notice_plugin_required",
     "description": "Wordpress Plugin Required Notification",
     "type": "library",
     "license": "MIT",
