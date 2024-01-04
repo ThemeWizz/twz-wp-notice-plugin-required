@@ -119,7 +119,7 @@ class Load
 ?>
 			<div class="error">
 				<p>
-					<?php if (!isset($this->plugins['server_url'])) { ?>
+					<?php if (!array_key_exists('server_url', $this->plugins)) { ?>
 						<a href="<?php echo esc_url($plugin->get_plugin_activate_link()); ?>" class='button button-secondary'><?php printf(esc_html__('Activate % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
 					<?php } else { ?>
 						<a href="#" class='button button-secondary activate'><?php printf(esc_html__('Activate % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
@@ -138,7 +138,7 @@ class Load
 		?>
 		<div class="error">
 			<p>
-				<?php if (!isset($this->plugins['server_url'])) { ?>
+			<?php if (!array_key_exists('server_url', $this->plugins)) { ?>
 					<a href="<?php echo esc_url($plugin->get_plugin_install_link()); ?>" class='button button-secondary'><?php printf(esc_html__('Install % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
 				<?php } else { ?>
 					<a href="#" class='button button-secondary install'><?php printf(esc_html__('Install % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
