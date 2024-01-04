@@ -39,11 +39,11 @@ class Load
 	public function __construct($current_plugin_name, array $plugins = array())
 	{
 		$this->current_plugin_name = $current_plugin_name;
-		$this->plugins             = $plugins;
+		$this->plugins = $plugins;
 
 		load_plugin_textdomain('twz-wp-notice-plugin-required', false, dirname(dirname(plugin_basename(__FILE__))) . '/languages/');
 
-		if (isset($plugin['server_url'])) {
+		if (isset($plugins['server_url'])) {
 
 			wp_enqueue_script('plugin-installer', plugin_dir_url(__FILE__) . 'assets/twz/js/installer.js', ['jquery'], '1.0.0', false);
 			wp_localize_script(
@@ -119,7 +119,7 @@ class Load
 ?>
 			<div class="error">
 				<p>
-					<?php if (!isset($plugin['server_url'])) { ?>
+					<?php if (!isset($this->plugins['server_url'])) { ?>
 						<a href="<?php echo esc_url($plugin->get_plugin_activate_link()); ?>" class='button button-secondary'><?php printf(esc_html__('Activate % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
 					<?php } else { ?>
 						<a href="#" class='button button-secondary activate'><?php printf(esc_html__('Activate % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
@@ -134,12 +134,11 @@ class Load
 		if (!current_user_can('install_plugins')) {
 			return false;
 		}
-		$install_url = $plugin->get_plugin_install_link();
 
 		?>
 		<div class="error">
 			<p>
-				<?php if (!isset($plugin['server_url'])) { ?>
+				<?php if (!isset($this->plugins['server_url'])) { ?>
 					<a href="<?php echo esc_url($plugin->get_plugin_install_link()); ?>" class='button button-secondary'><?php printf(esc_html__('Install % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
 				<?php } else { ?>
 					<a href="#" class='button button-secondary install'><?php printf(esc_html__('Install % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
