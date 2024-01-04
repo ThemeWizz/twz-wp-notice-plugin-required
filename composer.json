@@ -8,11 +8,13 @@
             "themewizz\\twz_wp_notice_plugin_required\\": "src/"
         }
     },
+    "require": {        
+        "php": "^8.1"        
+     },
     "authors": [
         {
             "name": "Steven Wagner",
             "email": "stevenw@themewizz.com"
         }
-    ],
-    "require": {}
+    ]
 }
