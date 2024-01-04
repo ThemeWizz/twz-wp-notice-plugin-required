@@ -77,15 +77,15 @@ class Load
 			return;
 		}
 
-		foreach ($this->plugins as $plugin) {
+		foreach ($this->plugins as $plugin_data) {
 
-			if (!isset($plugin['slug'], $plugin['name'])) {
+			if (!isset($plugin_data['slug'], $plugin_data['name'])) {
 				continue;
 			}
 
-			$plugin = Plugin::get_instance($plugin['slug'], $plugin['name']);
+			$plugin = Plugin::get_instance($plugin_data['slug'], $plugin_data['name']);
 
-			$notice = $this->add_notice($plugin);
+			$notice = $this->add_notice($plugin, $plugin_data);
 
 			/**
 			 * If notice is added then return.
@@ -104,7 +104,7 @@ class Load
 	 *
 	 * @return bool
 	 */
-	private function add_notice(Plugin $plugin)
+	private function add_notice(Plugin $plugin, $plugin_data)
 	{
 
 		if ($plugin->is_plugin_activated()) {
@@ -119,7 +119,7 @@ class Load
 ?>
 			<div class="error">
 				<p>
-					<?php if (!array_key_exists('server_url', $this->plugins)) { ?>
+					<?php if (!array_key_exists('server_url', $plugin_data)) { ?>
 						<a href="<?php echo esc_url($plugin->get_plugin_activate_link()); ?>" class='button button-secondary'><?php printf(esc_html__('Activate % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
 					<?php } else { ?>
 						<a href="#" class='button button-secondary activate'><?php printf(esc_html__('Activate % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
@@ -138,7 +138,7 @@ class Load
 		?>
 		<div class="error">
 			<p>
-			<?php if (!array_key_exists('server_url', $this->plugins)) { ?>
+			<?php if (!array_key_exists('server_url', $plugin_data)) { ?>
 					<a href="<?php echo esc_url($plugin->get_plugin_install_link()); ?>" class='button button-secondary'><?php printf(esc_html__('Install % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
 				<?php } else { ?>
 					<a href="#" class='button button-secondary install'><?php printf(esc_html__('Install % s', 'twz-wp-notice-plugin-required'), esc_html($plugin->get_plugin_name())); ?></a>
